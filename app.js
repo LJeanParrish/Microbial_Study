@@ -9,7 +9,6 @@
 function getPlots(id) {
   //connect app.js to the samples.json file
   d3.json("data/samples.json").then(data => {
-  //confirm data reading in correctly
   console.log(data)
 
   //create variable to bring in out_ids
@@ -23,6 +22,29 @@ function getPlots(id) {
   //create variable for otu_labels
   var label = data.samples[3].otu_labels;
   console.log(label)
+
+  //isolate the top 10 sample values
+  var top_10 = sample_val.slice(0,10).reverse()
+
+  //create traces
+  var trace1 = {
+    x: sample_val,
+    y: top_10,
+    text: labels,
+    marker:{
+      color: 'blue'},
+    type: "bar"
+    };
+  
+  //create the data variable
+  var data = [trace1];
+
+  //create the layout
+  var layout = {
+    title: "Top 10 Operational Taxonomic Units (OTUs)",
+  }
+
+
 
 
 } 
