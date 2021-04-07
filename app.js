@@ -72,7 +72,7 @@ function updatePlotly() {
       size: sample,
       color: otus,
       text: data.samples[0].otu_labels
-    };
+  },
 
     //create the data array for the plot
     var data2 = [trace2];
@@ -89,6 +89,7 @@ function updatePlotly() {
   /////Create Metadata Table///////////////////////////////////
   //Read metadata table pulling in demographic information
   var metadata = data.metadata;
+  console.log(metadata)
 
   //create variables for other demographic info
   var id = data.metadata.id;
