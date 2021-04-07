@@ -49,15 +49,35 @@ function getPlots(id) {
     Plotly.newPlot('plot', data, layout);
   });
 
-  ////////////BUBLE CHART////////////////////////////////////////////////////////////////////////////
+  /////////////////////////CONSTRUCT BUBLE CHART////////////////////////
+  var otus = data.samples[0].otu_ids
+  var sample = data.samples[0].sample_values
+  
   var trace2 = {
-    x: data.samples[0].otu_ids,
-    y: data.samples[0].sample_values,
+    x: otus,
+    y: sample,
     mode: "markers",
     marker: {
-      size: data.samples[0].sample_values,
-      color: data.samples[0].otu_ids
-    },
+      size: sample,
+      color: otus,
     text: data.samples[0].otu_labels
   };
+
+  //create the data array for the plot
+  var data2 = [trace2];
+
+  var layout2 = {
+    title: "Operational Taxonomic Units (OTUs)"
+  };
+
+  // create the bubble plot
+  Plotly.newPlot("bubble", data2, layout2);
+};
+
+
+
+
+
+
+
 
