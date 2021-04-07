@@ -50,8 +50,8 @@ function getPlots(id) {
   });
 
   /////////////////////////CONSTRUCT BUBLE CHART////////////////////////
-  var otus = data.samples[0].otu_ids
-  var sample = data.samples[0].sample_values
+  var otus = data.samples[0].otu_ids;
+  var sample = data.samples[0].sample_values;
   
   var trace2 = {
     x: otus,
@@ -73,6 +73,21 @@ function getPlots(id) {
   // create the bubble plot
   Plotly.newPlot("bubble", data2, layout2);
 };
+
+
+/////Create Metadata Table///////////////////////////////////
+//Read metadata table pulling in demographic information
+var metadata = data.metadata;
+
+//create variables for other demographic info
+var id = data.metadata.id;
+var ethnicity = data.metadata.ethnicity;
+var gender = data.metadata.gender;
+var age = data.metadata.age;
+var location = data.metadata.location;
+var bbtype = data.metadata.bbtype;
+var wfreq = data.metadata.wfreq;
+
 
 
 
