@@ -6,7 +6,7 @@
 //samples.otu_labels [3]
 
 
-function getPlots(id) {
+function init() {
   //connect app.js to the samples.json file
   d3.json("data/samples.json").then(data => {
     console.log(data)
@@ -47,12 +47,23 @@ function getPlots(id) {
 
     //use plotly to create new par chart
     Plotly.newPlot('plot', data, layout);
-  });
+
+///////////Create code for dropdown menus///////////////////////////////
+//Note HTML has been amended to apply dropdowns. 
+// Call updatePlotly() when a change takes place to the DOM
+d3.selectAll("#selDataset").on("change", updatePlotly);
+
+// This function is called when a dropdown menu item is selected
+function updatePlotly() {
+  // Use D3 to select the dropdown menu
+  var dropdownMenu = d3.select("#selDataset");
+  // Assign the value of the dropdown menu option to a variable
+  var dataset = dropdownMenu.property("value");
 
   /////////////////////////CONSTRUCT BUBLE CHART////////////////////////
   var otus = data.samples[0].otu_ids;
   var sample = data.samples[0].sample_values;
-  
+
   var trace2 = {
     x: otus,
     y: sample,
@@ -60,38 +71,35 @@ function getPlots(id) {
     marker: {
       size: sample,
       color: otus,
-    text: data.samples[0].otu_labels
+      text: data.samples[0].otu_labels
+    };
+
+    //create the data array for the plot
+    var data2 = [trace2];
+
+    var layout2 = {
+      title: "Operational Taxonomic Units (OTUs)"
+    };
+
+    // create the bubble plot
+    Plotly.newPlot("bubble", data2, layout2);
   };
 
-  //create the data array for the plot
-  var data2 = [trace2];
 
-  var layout2 = {
-    title: "Operational Taxonomic Units (OTUs)"
-  };
+  /////Create Metadata Table///////////////////////////////////
+  //Read metadata table pulling in demographic information
+  var metadata = data.metadata;
 
-  // create the bubble plot
-  Plotly.newPlot("bubble", data2, layout2);
-};
+  //create variables for other demographic info
+  var id = data.metadata.id;
+  var ethnicity = data.metadata.ethnicity;
+  var gender = data.metadata.gender;
+  var age = data.metadata.age;
+  var location = data.metadata.location;
+  var bbtype = data.metadata.bbtype;
+  var wfreq = data.metadata.wfreq;
 
-
-/////Create Metadata Table///////////////////////////////////
-//Read metadata table pulling in demographic information
-var metadata = data.metadata;
-
-//create variables for other demographic info
-var id = data.metadata.id;
-var ethnicity = data.metadata.ethnicity;
-var gender = data.metadata.gender;
-var age = data.metadata.age;
-var location = data.metadata.location;
-var bbtype = data.metadata.bbtype;
-var wfreq = data.metadata.wfreq;
-
-
-
-
-
+init();
 
 
 
