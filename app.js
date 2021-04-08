@@ -60,8 +60,7 @@ function buildcharts(sampleid) {
     //use plotly to create new par chart
     Plotly.newPlot('bar', data, layout);
 
-    ///call new trace and new bubble layout can use same x and y
-
+    ////////CREATE THE BUBLE CHART////////////////////////////////
     var trace2 = {
       x: sample_val,
       y: ids,
@@ -81,7 +80,18 @@ function buildcharts(sampleid) {
     };
 
     // create the bubble plot
-    Plotly.newPlot("bubble", data2, layout2);  
+    Plotly.newPlot("bubble", data2, layout2); 
+    
+    /////CREATE THE DEMOGRAPHICS TABLE//////////////////////////
+
+    var metadata = data.metadata;
+    console.log(metadata);
+    
+    // Get a reference to the html body
+    
+    var body = d3.select(".panel-body");
+
+
 })
 }
 
@@ -99,6 +109,29 @@ function buildcharts(sampleid) {
 // var location = data.metadata.location;
 // var bbtype = data.metadata.bbtype;
 // var wfreq = data.metadata.wfreq;
+
+// var metadata = data.metadata;
+// console.log(tableData);
+
+// Get a reference to the table body
+// var tbody = d3.select("tbody");
+
+// Step 1: Loop Through `data` and console.log each UFO report object
+// tableData.forEach(function (ufoReport) {
+//   console.log(ufoReport);
+
+//   // Step 2:  Use d3 to append one table row `tr` for each ufo report object
+//   var row = tbody.append("tr");
+
+//   // Step 3:  Use `Object.entries` to console.log each ufo report value
+//   Object.entries(ufoReport).forEach(function ([key, value]) {
+//     console.log(key, value);
+
+//     // Append a cell to the row for each value in the ufo report object
+//     var cell = row.append("td");
+//     cell.text(value);
+//   });
+// });
 
 dropdownmenu();
 
