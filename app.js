@@ -71,7 +71,7 @@ function buildcharts(sampleid) {
         color: ids,
         text: label,
       }
-    },
+    };
 
     //create the data array for the plot
     var data2 = [trace2];
@@ -84,44 +84,6 @@ function buildcharts(sampleid) {
     Plotly.newPlot("bubble", data2, layout2);  
 })
 }
-
-///////////Create code for dropdown menus///////////////////////////////
-//Note HTML has been amended to apply dropdowns. 
-// Call updatePlotly() when a change takes place to the DOM
-// d3.selectAll("#selDataset").on("change", updatePlotly);
-
-// // This function is called when a dropdown menu item is selected
-// function updatePlotly() {
-//   // Use D3 to select the dropdown menu
-//   var dropdownMenu = d3.select("#selDataset");
-//   // Assign the value of the dropdown menu option to a variable
-//   var dataset = dropdownMenu.property("value");
-
-/////////////////////////CONSTRUCT BUBLE CHART////////////////////////
-//   var otus = data.samples[0].otu_ids;
-//   var sample = data.samples[0].sample_values;
-
-//   var trace2 = {
-//     x: otus,
-//     y: sample,
-//     mode: "markers",
-//     marker: {
-//       size: sample,
-//       color: otus,
-//       text: data.samples[0].otu_labels
-//     }
-//   },
-
-//   //create the data array for the plot
-//   var data2 = [trace2];
-
-//   var layout2 = {
-//     title: "Operational Taxonomic Units (OTUs)"
-//   };
-
-//   // create the bubble plot
-//   Plotly.newPlot("bubble", data2, layout2);
-// };
 
 
 /////Create Metadata Table///////////////////////////////////
