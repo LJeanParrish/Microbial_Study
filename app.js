@@ -102,9 +102,18 @@ function demoInfo(demoid) {
     //empty the demo info panel each time before getting new data
     panelBody.html("");
 
-    Object.entries(filteredDemo).forEach((key) => {
-      panelBody.append("p").text(key[0] + ":" + key[1]);
-    });
+    d3.select(panelBody)
+      .selectAll("tr")
+      .data(filteredDemo)
+      .enter()
+      .append("tr")
+      .html(function(d) {
+        return `<td>${d.id}</td><td>${d.ethnicity}</td><td>${d.gender}</td><td>${d.age}</td><td>${d.location}</td><td>${d.bbtype}</td><td>${d.wfreq}</td>`;
+      });
+
+    // Object.entries(filteredDemo).forEach((key) => {
+    //   panelBody.append("p").text(key[0] + ":" + key[1]);
+    // });
   });
 };
 
