@@ -63,9 +63,20 @@ function buildcharts(sampleid) {
     Plotly.newPlot('bar', data, layout);
 
     ////////CREATE THE BUBLE CHART////////////////////////////////
+    // var trace2 = {
+    //   x: sample_val,
+    //   y: ids,
+    //   mode: "markers",
+    //   marker: {
+    //     size: sample_val,
+    //     color: ids,
+    //     text: label,
+    //   }
+    // };
+
     var trace2 = {
-      x: sample_val,
-      y: ids,
+      x: ids,
+      y: sample_val,
       mode: "markers",
       marker: {
         size: sample_val,
@@ -73,6 +84,9 @@ function buildcharts(sampleid) {
         text: label,
       }
     };
+
+
+
 
     //create the data array for the plot
     var data2 = [trace2];
