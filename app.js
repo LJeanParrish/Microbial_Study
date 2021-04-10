@@ -1,4 +1,5 @@
 ////////DROPDOWN SET-UP////////////////////////////////////
+//initialize dropdown menu so that all charts will change when ID changed
 function dropdownmenu() {
   d3.json("data/samples.json").then(data => {
     var samplenames = data.names
@@ -63,17 +64,7 @@ function buildcharts(sampleid) {
     Plotly.newPlot('bar', data, layout);
 
     ////////CREATE THE BUBLE CHART////////////////////////////////
-    // var trace2 = {
-    //   x: sample_val,
-    //   y: ids,
-    //   mode: "markers",
-    //   marker: {
-    //     size: sample_val,
-    //     color: ids,
-    //     text: label,
-    //   }
-    // };
-
+    //create new trace for the bubble shart leveraging above variables  
     var trace2 = {
       x: ids,
       y: sample_val,
@@ -84,9 +75,6 @@ function buildcharts(sampleid) {
         text: label,
       }
     };
-
-
-
 
     //create the data array for the plot
     var data2 = [trace2];
