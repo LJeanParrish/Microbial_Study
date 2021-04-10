@@ -106,13 +106,8 @@ function buildcharts(sampleid) {
 
       Object.entries(filteredDemo).forEach(([key, value]) => {
         var row = panelBody.append("tr");
-        row.append("td").html(key);
-        row.append('td').html(value);
-
-
-
-
-        
+        row.append("td").html(`${key}:  ${value}`);
+     
       });
     });
   };
