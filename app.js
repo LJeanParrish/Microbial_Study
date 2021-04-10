@@ -11,11 +11,12 @@ function dropdownmenu() {
   })
 }
 
-function buildtable(newid) { }
+function buildtable(demoid) { }
 function optionChanged(newid) {
   buildtable(newid)
   buildcharts(newid)
 }
+
 
 /////////HORIZONTAL BAR CHART SET-UP///////////////////////
 function buildcharts(sampleid) {
@@ -40,7 +41,7 @@ function buildcharts(sampleid) {
     //create trace for horizontal bar chart
     var trace1 = {
       x: sample_val.slice(0, 10).reverse(),
-      y: ids.slice(0, 10).reverse(),
+      y: ids.slice(0, 10).reverse().map(y=>`OTU ${y}`),
       text: label.slice(0, 10).reverse(),
       marker: {
         color: 'blue'
@@ -84,37 +85,36 @@ function buildcharts(sampleid) {
 
     // create the bubble plot
     Plotly.newPlot("bubble", data2, layout2);
-  })
-}
-
-/////CREATE THE DEMOGRAPHICS TABLE//////////////////////////
-function demoInfo(demoid) {
-  d3.json("data/samples.json").then(data => {
-    var metadata = data.metadata;
-    console.log(metadata);
-    
-
-    //filter demo information
-    var filteredDemo = metadata.filter(info => info.demoid.toString() === demoid)[0];
-
-    var panelBody = d3.select("#sample-metadata");
-
-    //empty the demo info panel each time before getting new data
-    panelBody.html("");
-
-    d3.select(panelBody)
-      .selectAll("tr")
-      .data(filteredDemo)
-      .enter()
-      .append("tr")
-      .html(function(d) {
-        return `<td>${d.id}</td><td>${d.ethnicity}</td><td>${d.gender}</td><td>${d.age}</td><td>${d.location}</td><td>${d.bbtype}</td><td>${d.wfreq}</td>`;
-      });
-
-    // Object.entries(filteredDemo).forEach((key) => {
-    //   panelBody.append("p").text(key[0] + ":" + key[1]);
-    // });
   });
-};
+
+
+  /////CREATE THE DEMOGRAPHICS TABLE//////////////////////////
+     d3.json("data/samples.json").then(data => {      
+      var metadata = data.metadata;
+      console.log(metadata);
+
+      var demoid = d3.select("select").node().value
+
+      //filter demo information
+      var filteredDemo = metadata.filter(y => y.id == demoid)[0];
+      console.log(filteredDemo)
+
+      var panelBody = d3.select("#sample-metadata");
+
+      //empty the demo info panel each time before getting new data
+      panelBody.html("");
+
+      Object.entries(filteredDemo).forEach(([key, value]) => {
+        var row = panelBody.append("tr");
+        row.append("td").html(key);
+        row.append('td').html(value);
+
+
+
+
+        
+      });
+    });
+  };
 
 dropdownmenu();
